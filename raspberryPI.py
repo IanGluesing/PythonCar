@@ -4,6 +4,8 @@ import struct
 import time
 import picamera
 
+# Adapted from https://jmlb.github.io/robotics/2017/11/22/picamera_streaming_video/
+
 def write_img_to_stream(stream):
     connection.write(struct.pack('<L', stream.tell()))
     connection.flush()

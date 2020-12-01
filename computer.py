@@ -5,6 +5,8 @@ from PIL import Image
 import time
 import matplotlib.pyplot as pl
 
+# Adapted from https://jmlb.github.io/robotics/2017/11/22/picamera_streaming_video/
+
 if __name__ == '__main__':
     # Start a socket listening for connections on 0.0.0.0:8000
     # (0.0.0.0 means all interfaces)
