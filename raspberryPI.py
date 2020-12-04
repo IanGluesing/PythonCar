@@ -1,3 +1,4 @@
+# client.py
 import io
 import socket
 import struct
@@ -21,10 +22,9 @@ def gen_seq():
         yield stream
         write_img_to_stream(stream)
 
-
 # Connect a client socket to server_ip:8000
 client_socket = socket.socket()
-ip_address = "" # Local ip 192.xxx.x.xxx
+ip_address = "192.168.1.20"
 client_socket.connect( ( ip_address, 8000 ) )
 # Make a file-like object out of the connection
 connection = client_socket.makefile('wb')
@@ -32,7 +32,9 @@ connection = client_socket.makefile('wb')
 if __name__ == '__main__':
     try:
         with picamera.PiCamera() as camera:
-            camera.resolution = (50,50)
+            camera.resolution = (640,480)
+            #Adjust framerate to send higher number of pixels 
+            camera.framerate = 10
             # Start a preview and let the camera warm up for 2 seconds
             camera.start_preview()
             time.sleep(2)
