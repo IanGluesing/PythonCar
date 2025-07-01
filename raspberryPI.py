@@ -15,7 +15,6 @@ def write_img_to_stream(stream):
     stream.seek(0)
     stream.truncate()
 
-
 def gen_seq():
     stream = io.BytesIO()
     while True:
@@ -24,24 +23,24 @@ def gen_seq():
 
 # Connect a client socket to server_ip:8000
 client_socket = socket.socket()
-ip_address = "192.168.1.20"
+ip_address = "192.168.1.8"
 client_socket.connect( ( ip_address, 8000 ) )
+client_socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 # Make a file-like object out of the connection
 connection = client_socket.makefile('wb')
 
 if __name__ == '__main__':
     try:
         with picamera.PiCamera() as camera:
-            camera.resolution = (640,480)
+            camera.resolution = (1280, 720)
             #Adjust framerate to send higher number of pixels 
-            camera.framerate = 10
+            camera.framerate = 120
             # Start a preview and let the camera warm up for 2 seconds
             camera.start_preview()
             time.sleep(2)
             camera.stop_preview()
-            camera.capture_sequence(gen_seq(), "jpeg", use_video_port=True)
+            camera.capture_sequence(gen_seq(), "jpeg", quality=85, use_video_port=True)
         connection.write(struct.pack('<L', 0))
     finally:
         connection.close()
         client_socket.close()
-
