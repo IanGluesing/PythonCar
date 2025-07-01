@@ -92,7 +92,7 @@ def frame_processor(queue: Queue):
         i = frame(cv_img)
 
         # Optional image processing:
-        # i = orbMethod(i)
+        i = harrisCorner(i)
         # i = BFMatch(i, lastI)
 
         drawMethod(i.image)
