@@ -8,5 +8,5 @@ def process_frame_with_orb(input_frame):
     #Compute the keypoints and desciptions
     input_frame.kp, input_frame.des = orb.compute(input_frame.image, input_frame.kp)
     #Draw the keypoints to the image
-    input_frame.image = cv2.drawKeypoints(input_frame.image, input_frame.kp, outImage = None, color =(10,186,181), flags = 0)
+    input_frame.image = cv2.drawKeypoints(input_frame.image, input_frame.kp, outImage = None, color =(255,0,0), flags = 0)
     return input_frame
